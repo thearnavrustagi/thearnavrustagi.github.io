@@ -1,0 +1,72 @@
+.heading {
+    font-size: 15vw;
+    text-align: center;
+    font-family: 'League Spartan', sans-serif;
+    margin:0 !important;
+    margin-top: 1.5rem !important;
+    color:#790012;
+}
+
+.subhead {
+    font-size: 5vw;
+    font-family: 'Playfair Display', serif;
+    color:#790012;
+    margin:0;
+    text-align: center;
+    margin-bottom: 5vh;
+}
+
+.link {
+    color: #790012;
+}
+
+._image {
+    width: 100vw;
+    margin:auto;
+}
+
+.articlehead {
+    color:#fff;
+    font-size: 10vw;
+    font-family: 'Playfair Display', serif;
+    margin:2.5vw;
+    margin-bottom:0vw;
+}
+
+.article {
+    color:#fff;
+    margin:2.5vw;
+    margin-top:0vw;
+    font-size:1rem;
+    font-family: 'Playfair Display', serif;
+}
+
+@media only screen and (min-width:600px) {
+    ._image {
+        width: 55vw;
+    }
+
+    .columns {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .subhead {
+        font-size:3rem;
+        text-align:left;
+        margin-top:-2.5rem;
+    }
+
+    .heading {
+        text-align:left;
+    }
+
+    .section {
+        padding-left:2.5rem
+    }
+
+    .articlehead {
+        margin-top:0;
+        font-size:6rem;
+    }
+}
