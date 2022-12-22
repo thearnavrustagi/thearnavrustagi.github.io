@@ -1,0 +1,10 @@
+{ 
+    "src" : [
+    "projects/hitokara.html",
+    "projects/musket.html",
+    "projects/masterpiece.html",
+    "projects/animegami.html",
+    "projects/pagerank.html",
+    "projects/fractals.html"
+    ]
+}
