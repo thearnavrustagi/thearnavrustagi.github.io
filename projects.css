@@ -31,7 +31,7 @@ a {
 }
 
 .project-heading {
-    font-size: 10vh;
+    font-size: 7vh;
     font-family: 'Raleway', sans-serif;
     font-weight:900;
     padding:1rem;
@@ -79,6 +79,22 @@ ul {
     border-color:#F3CCE9;
 }
 
+.masterpiece-primary {
+    color: #d84339;
+}
+
+.masterpiece-secondary {
+    image-rendering: pixelated;
+    border-color:none;
+}
+
+.masterpiece-accent {
+    color:#fff;
+}
+
+.animegami {
+    color:#fff;
+}
 @media only screen and (min-width:600px) {
     .main-heading {
         font-size: 22.5vw;
