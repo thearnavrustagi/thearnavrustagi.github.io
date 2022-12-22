@@ -23,7 +23,10 @@ a {
 .screen {
     height: 100vh;
     max-width: 100vw;
-    overflow:none;
+    overflow-x:hidden;
+    scrollbar-width: 0;
+    -ms-scrollbar-width: 0;
+
 }
 
 .hitokara-pink {
@@ -94,6 +97,10 @@ ul {
 
 .animegami {
     color:#fff;
+}
+
+.screen::-webkit-scrollbar {
+    display:none;
 }
 @media only screen and (min-width:600px) {
     .main-heading {
