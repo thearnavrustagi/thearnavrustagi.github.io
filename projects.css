@@ -1,3 +1,8 @@
+#scroll_snap_container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+}
+
 .main-heading {
     font-family: 'Raleway', sans-serif;
     font-weight: 900;
@@ -26,7 +31,7 @@ a {
     overflow-x:hidden;
     scrollbar-width: 0;
     -ms-scrollbar-width: 0;
-
+    scroll-snap-align: center;
 }
 
 .hitokara-pink {

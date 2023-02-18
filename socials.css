@@ -1,0 +1,52 @@
+* {
+    font-family: 'Source Code Pro';
+    color:#fff;
+}
+
+p {
+    opacity: 50%;
+}
+
+h2 {
+    font-weight: 800;
+    font-size:1.2rem;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.primary {
+    color: #00ff66;
+}
+
+.gmail {
+    color:#FF4400;
+}
+
+.github {
+    color: #00ff00;
+}
+
+.linkedin {
+    color:#00AAFF;
+}
+
+.instagram {
+    color :#FF00AA;
+}
+
+@media only screen and (min-width:600px) {
+    p {
+        font-size: 1.2rem;
+    }
+
+    h2 {
+        font-size: 3rem;
+    }
+
+    h3 {
+        font-size: 5rem;
+        padding-top: 10rem;
+    }
+}
