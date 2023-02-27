@@ -1,6 +1,7 @@
 const PROJECTS = 'projects.json'
 
 main = () => {
+    document.getElementById("screen").focus()
     initialize_project_urls(PROJECTS)
 }
 
