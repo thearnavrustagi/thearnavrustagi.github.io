@@ -1,0 +1,6 @@
+Player starts outside the maze (CSS position bug)
+Movement speed is too high, making it hard to control
+Collision detection is incorrect due to wrong offset calculations
+Wall collision checking is incomplete
+Goal detection is inconsistent
+Score sometimes fails to update

@@ -1,0 +1,5 @@
+String Concatenation Bug: The numbers are treated as strings, so "2" + "2" will give "22" instead of 4
+Operation Display Bug: When setting an operation, the display doesn't clear
+Division by Zero Bug: There's no check for division by zero
+State Reset Bug: After calculation, the variables aren't reset
+Clear Function Bug: The clear button only clears the display but not the stored numbers

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .game-container {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      border: 2px solid black;
+      margin: 20px auto;
+    }
+    
+    #player {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      top: -20px;
+      left: -20px;
+    }
+    
+    .wall {
+      position: absolute;
+      background-color: black;
+    }
+    
+    #goal {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: green;
+      right: 0;
+      bottom: 0;
+    }
+    
+    #score {
+      text-align: center;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div id="score">Score: <span id="scoreValue">0</span></div>
+  <div class="game-container" id="maze">
+    <div id="player"></div>
+    <div id="goal"></div>
+  </div>
+
+  <script>
+    const player = document.getElementById('player');
+    const maze = document.getElementById('maze');
+    const goal = document.getElementById('goal');
+    const scoreElement = document.getElementById('scoreValue');
+    
+    const speed = 50;
+    let score = 0;
+    
+    // Create walls
+    const walls = [
+      { x: 100, y: 0, width: 20, height: 300 },
+      { x: 200, y: 100, width: 20, height: 300 },
+      { x: 300, y: 0, width: 20, height: 300 }
+    ];
+    
+    walls.forEach(wall => {
+      const wallElement = document.createElement('div');
+      wallElement.className = 'wall';
+      wallElement.style.left = wall.x + 'px';
+      wallElement.style.top = wall.y + 'px';
+      wallElement.style.width = wall.width + 'px';
+      wallElement.style.height = wall.height + 'px';
+      maze.appendChild(wallElement);
+    });
+    
+    function checkCollision(element1, element2) {
+      const rect1 = element1.getBoundingClientRect();
+      const rect2 = element2.getBoundingClientRect();
+      
+      return !(rect1.right < rect2.left || 
+               rect1.left > rect2.right || 
+               rect1.bottom < rect2.top || 
+               rect1.top > rect2.bottom);
+    }
+    
+    function movePlayer(x, y) {
+      const newLeft = parseInt(player.style.left || 0) + x;
+      const newTop = parseInt(player.style.top || 0) + y;
+      
+      let canMove = true;
+      
+      if (canMove) {
+        player.style.left = newLeft + 'px';
+        player.style.top = newTop + 'px';
+      }
+      
+      if (Math.abs(newLeft - goal.offsetLeft) < 20 && 
+          Math.abs(newTop - goal.offsetTop) < 20) {
+        score += 10;
+        scoreElement.textContent = score;
+        resetPlayer();
+      }
+    }
+    
+    function resetPlayer() {
+      player.style.left = '20px';
+      player.style.top = '20px';
+    }
+    
+    // Initial position
+    resetPlayer();
+    
+    // Movement controls
+    document.addEventListener('keydown', (e) => {
+      switch(e.key) {
+        case 'ArrowLeft':
+          movePlayer(-speed, 0);
+          break;
+        case 'ArrowRight':
+          movePlayer(speed, 0);
+          break;
+        case 'ArrowUp':
+          movePlayer(0, -speed);
+          break;
+        case 'ArrowDown':
+          movePlayer(0, speed);
+          break;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buggy Calculator</title>
+    <style>
+        .calculator {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background-color: #f0f0f0;
+        }
+        #display {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 10px;
+            font-size: 24px;
+            text-align: right;
+            padding: 5px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+        }
+        button {
+            padding: 15px;
+            font-size: 18px;
+            border: 1px solid #999;
+            border-radius: 4px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        <div class="buttons">
+            <button onclick="appendNumber(7)">7</button>
+            <button onclick="appendNumber(8)">8</button>
+            <button onclick="appendNumber(9)">9</button>
+            <button onclick="setOperation('/')">/</button>
+            
+            <button onclick="appendNumber(4)">4</button>
+            <button onclick="appendNumber(5)">5</button>
+            <button onclick="appendNumber(6)">6</button>
+            <button onclick="setOperation('*')">*</button>
+            
+            <button onclick="appendNumber(1)">1</button>
+            <button onclick="appendNumber(2)">2</button>
+            <button onclick="appendNumber(3)">3</button>
+            <button onclick="setOperation('-')">-</button>
+            
+            <button onclick="appendNumber(0)">0</button>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="setOperation('+')">+</button>
+        </div>
+    </div>
+
+    <script>
+        let firstNumber = '';
+        let operation = '';
+        let secondNumber = '';
+        
+        function appendNumber(num) {
+            if (operation === '') {
+                firstNumber += num;
+                display.value = firstNumber;
+            } else {
+                secondNumber += num;
+                display.value = secondNumber;
+            }
+        }
+        
+        function setOperation(op) {
+            operation = op;
+        }
+        
+        function calculate() {
+            let result = 0;
+            switch(operation) {
+                case '+':
+                    result = firstNumber + secondNumber;
+                    break;
+                case '-':
+                    result = firstNumber - secondNumber;
+                    break;
+                case '*':
+                    result = firstNumber * secondNumber;
+                    break;
+                case '/':
+                    result = firstNumber / secondNumber;
+                    break;
+            }
+            
+            display.value = result;
+        }
+        
+        function clearDisplay() {
+            display.value = '';
+        }
+    </script>
+</body>
+</html>

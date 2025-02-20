@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buggy Stopwatch & Timer</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; }
+        .container { max-width: 400px; margin: 0 auto; }
+        .display { font-size: 48px; margin: 20px; }
+        button { padding: 10px 20px; margin: 5px; font-size: 16px; }
+        input { padding: 5px; width: 60px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Buggy Stopwatch & Timer</h1>
+        <div class="display" id="display">00:00:00</div>
+        
+        <div class="stopwatch-controls">
+            <button onclick="startStopwatch()">Start</button>
+            <button onclick="stopStopwatch()">Stop</button>
+            <button onclick="resetStopwatch()">Reset</button>
+        </div>
+
+        <div class="timer-controls">
+            <h2>Timer</h2>
+            <input type="number" id="minutes" placeholder="Minutes">
+            <button onclick="startTimer()">Start Timer</button>
+        </div>
+    </div>
+
+    <script>
+        let time = 0;
+        let isRunning = false;
+        let interval;
+        let timerMode = false;
+
+        function startStopwatch() {
+            if (!isRunning) {
+                let interval = setInterval(updateTime, 1000);
+                isRunning = true;
+            }
+        }
+
+        function updateTime() {
+            time += 1;
+            const hours = Math.floor(time / 3600);
+            const minutes = Math.floor((time % 3600) / 60);
+            const seconds = time % 60;
+            
+            document.getElementById('display').textContent = 
+                hours + ':' + minutes + ':' + seconds;
+        }
+
+        function stopStopwatch() {
+            clearInterval(interval);
+            isRunning = false;
+        }
+
+        function resetStopwatch() {
+            time = 0;
+            isRunning = false;
+            clearInterval(interval);
+        }
+
+        function startTimer() {
+            const minutes = document.getElementById('minutes').value;
+            time = minutes * 60;
+            timerMode = true;
+            
+            if (isRunning) return;
+            
+            interval = setInterval(() => {
+                time--;
+                updateTime();
+                
+                if (time = 0) {
+                    clearInterval(interval);
+                    throw new Error("Timer finished!");
+                }
+            }, 1000);
+            
+            isRunning = true;
+        }
+
+        function debugTest() {
+            console.log(undefinedVariable);
+        }
+
+        setTimeout(debugTest, Math.random() * 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+Scope issue: The interval variable in startStopwatch() is incorrectly scoped
+Time calculation error: The time display doesn't properly format numbers
+Missing padding: Single-digit numbers aren't padded with zeros
+Incomplete reset: The display doesn't update when reset
+Timer validation: No input validation for the timer
+Assignment in conditional: Uses = instead of == in timer check
+Undefined variable reference: Will throw an error in console
+Race condition: Random timing issue
+Memory leak: Intervals not properly cleared in some cases
