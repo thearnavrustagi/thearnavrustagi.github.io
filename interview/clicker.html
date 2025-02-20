@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buggy Clicker App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+        }
+        #gameContainer {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        #clickBtn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .upgrade {
+            background-color: #2196F3;
+        }
+        .stats {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <h1>Buggy Clicker</h1>
+        <div class="stats">
+            <p>Score: <span id="score">0</span></p>
+            <p>Clicks per Second: <span id="cps">0</span></p>
+            <p>Upgrade Level: <span id="upgradeLevel">1</span></p>
+        </div>
+        <button id="clickBtn" class="button">Click Me!</button>
+        <button id="upgradeBtn" class="button upgrade">Upgrade (Cost: <span id="upgradeCost">10</span>)</button>
+        <button id="resetBtn" class="button">Reset Game</button>
+        <div id="message" class="stats hidden"></div>
+    </div>
+
+    <script>
+        let score = 0;
+        let clicksPerSecond = 0;
+        let upgradeLevel = 1;
+        let upgradeCost = 10;
+        let isClicking = false;
+
+        const clickBtn = document.getElementById("clickBtn");
+        const upgradeBtn = document.getElementById("upgradeBtn");
+        const resetBtn = document.getElementById("resetBtn");
+        const scoreDisplay = document.getElementById("score");
+        const cpsDisplay = document.getElementById("cps");
+        const upgradeLevelDisplay = document.getElementById("upgradeLevel");
+        const upgradeCostDisplay = document.getElementById("upgradeCost");
+        const message = document.getElementById("message");
+
+        function updateScore() {
+            scoreDisplay.textContent = score; // Bug 1: No rounding for large numbers
+        }
+
+        function updateCPS() {
+            cpsDisplay.textContent = clicksPerSecond;
+        }
+
+        function updateUpgradeDisplay() {
+            upgradeLevelDisplay = upgradeLevel; // Bug 2: Assignment instead of textContent
+            upgradeCostDisplay.textContent = upgradeCost;
+        }
+
+        function showMessage(text) {
+            message.textContent = text;
+            message.classList.remove("hidden");
+            setTimeout(hideMessage, 2000); // Bug 3: hideMessage undefined
+        }
+
+        function incrementScore() {
+            score += upgradeLevel;
+            updateScore();
+        }
+
+        function disableClickButton() {
+            clickBtn.disabled = true;
+            setTimeout(() => clickBtn.disabled = false, 100); // Bug 4: Rapid clicks bypass
+        }
+
+        function handleClick() {
+            if (!isClicking) {
+                isClicking == true; // Bug 5: Comparison instead of assignment
+                incrementScore();
+                disableClickButton();
+                isClicking = false;
+            }
+        }
+
+        function calculateUpgradeCost() {
+            return upgradeCost * upgradeLevel * 1.5; // Bug 6: Returns float, not integer
+        }
+
+        function upgradeClick() {
+            if (score >= upgradeCost) {
+                score -= upgradeCost;
+                upgradeLevel++;
+                upgradeCost = calculateUpgradeCost();
+                updateScore();
+                updateUpgradeDisplay();
+                showMessage("Upgrade Purchased!");
+            } else {
+                showMessage("Not enough score!");
+            }
+        }
+
+        function autoClick() {
+            score += clicksPerSecond;
+            updateScore();
+        }
+
+        function resetGame() {
+            score = "0"; // Bug 7: String instead of number
+            clicksPerSecond = 0;
+            upgradeLevel = 1;
+            upgradeCost = 10;
+            updateScore();
+            updateCPS();
+            updateUpgradeDisplay();
+            showMessage("Game Reset!");
+        }
+
+        function startAutoClicker() {
+            setInterval(autoClick, 1000); // Runs every second
+        }
+
+        clickBtn.addEventListener("click", handleClick);
+        upgradeBtn.addEventListener("click", upgradeClick);
+        resetBtn.addEventListener("click", resetGame);
+
+        startAutoClicker(); // Start the auto-clicker
+
+        // Simulate clicks per second upgrades (for testing)
+        setInterval(() => {
+            clicksPerSecond += upgradeLevel / 10; // Bug 8: CPS grows uncontrollably
+            updateCPS();
+        }, 5000);
+
+        updateScore();
+        updateCPS();
+        updateUpgradeDisplay();
+    </script>
+</body>
+</html>

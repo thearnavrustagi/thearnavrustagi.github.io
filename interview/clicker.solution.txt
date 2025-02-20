@@ -1,0 +1,18 @@
+Bugs Introduced (6+ Hard Bugs Requiring Dev Tools)
+
+    Bug 1 (updateScore): Score isn't rounded or formatted, causing display issues with large numbers (e.g., floating-point precision errors).
+        Fix: Use Math.floor(score) or score.toFixed(0).
+    Bug 2 (updateUpgradeDisplay): upgradeLevelDisplay = upgradeLevel assigns a number to the DOM element instead of updating textContent.
+        Fix: Use upgradeLevelDisplay.textContent = upgradeLevel.
+    Bug 3 (showMessage): hideMessage is undefined, causing a ReferenceError in the console after 2 seconds.
+        Fix: Define function hideMessage() { message.classList.add("hidden"); }.
+    Bug 4 (disableClickButton): Rapid clicks bypass the disable timer because the cooldown is too short and not synchronized properly.
+        Fix: Increase timeout or use a debouncing mechanism.
+    Bug 5 (handleClick): isClicking == true uses comparison instead of assignment, breaking the click lock logic.
+        Fix: Change to isClicking = true.
+    Bug 6 (calculateUpgradeCost): Returns a float (e.g., 15.5), but upgradeCostDisplay expects an integer, leading to UI glitches.
+        Fix: Use Math.round(upgradeCost * upgradeLevel * 1.5).
+    Bug 7 (resetGame): score = "0" sets score as a string, causing type coercion issues later (e.g., "0" + 1 = "01").
+        Fix: Use score = 0.
+    Bug 8 (CPS Interval): CPS increases uncontrollably every 5 seconds due to upgradeLevel / 10, leading to exponential growth.
+        Fix: Cap CPS or remove this unintended growth.

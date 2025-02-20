@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TODO List</title>
+    <style>
+        .task { margin: 5px; }
+        .completed { text-decoration: line-through }
+    </style>
+</head>
+<body>
+    <h1>My TODO List</h1>
+    <input type="text" id="taskInput">
+    <button onclick="addTask">Add Task</button>
+    <ul id="taskList"></ul>
+
+    <script>
+        let tasks = [];
+
+        function addTask() {
+            let input = document.getElementById("taskInput");
+            let taskText = input.Value;  // Bug 1: Wrong capitalization
+            
+            if (taskText = "") return;   // Bug 2: Single = instead of == or ===
+
+            tasks.Push(taskText);        // Bug 3: Wrong method name
+            
+            let li = document.createElement("li");
+            li.innerHTML = taskText;
+            li.className = "task";
+            
+            let deleteBtn = document.createElement("button");
+            deleteBtn.innerHTML = "Delete";
+            deleteBtn.onclick = deleteTask();  // Bug 4: Immediate function call
+            
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.onChange = toggleComplete;  // Bug 5: Case sensitivity
+            
+            li.appendChild(checkbox);
+            li.append(DELETEBTN);         // Bug 6: Case sensitivity and wrong variable name
+            
+            document.getElementById("taskList").appendChild(li);
+            input.value = "";           // This works but comes after other bugs
+        }
+
+        function toggleComplete() {
+            this.parentElement.classList.toggle("completed");
+            let index = tasks.indexOf(this.parentElement.textContent);
+            tasks[index].completed = true;  // Bug 7: No completed property exists
+        }
+
+        function deleteTask() {
+            let li = this.parentElement;
+            let index = tasks.indexOf(li.TextContent);  // Bug 8: Wrong capitalization
+            task.splice(index, 1);                      // Bug 9: Wrong array name
+            li.remove();
+        }
+
+        // Bug 10: Event listener added incorrectly
+        document.getElementById("taskInput").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                addTask;  // Missing parentheses, won't execute
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic-Tac-Toe</title>
+    <style>
+        .board { display: grid; grid-template-columns: repeat(3, 100px); }
+        .cell { width: 100px; height: 100px; border: 1px solid black; text-align: center; font-size: 40px; }
+    </style>
+</head>
+<body>
+    <div id="board" class="board"></div>
+    <button onclick="resetGame()">Reset</button>
+    <div id="status"></div>
+
+    <script>
+        let currentPlayer = 'X';
+        let gameBoard = ['', '', '', '', '', '', '', '', ''];
+        const winCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+
+        function initBoard() {
+            let board = document.getElementById('board');
+            for (let i = 0; i < 9; i++) board.innerHTML += `<div class="cell" onclick="makeMove(${i})">${gameBoard[i]}</div>`;
+        }
+
+        function makeMove(index) {
+            if (gameBoard[index] = '') gameBoard[index] = currentPlayer; // Bug 1: Assignment instead of comparison
+            updateBoard();
+            checkWinner();
+            currentPlayer = currentPlayer == 'X' ? 'O' : 'X';
+        }
+
+        function updateBoard() {
+            let cells = document.getElementsByClassName('cell');
+            for (let i = 0; i < cells.length; i++) cells[i].innerText = gameBoard[i + 1]; // Bug 2: Offset index
+        }
+
+        function checkWinner() {
+            for (combo of winCombos) {
+                if (gameBoard[combo[0]] == gameBoard[combo[1]] == gameBoard[combo[2]]) { // Bug 3: Incorrect comparison
+                    document.getElementById('status').innerText = `${currentPlayer} Wins!`;
+                    return;
+                }
+            }
+        }
+
+        function resetGame() {
+            gameBoard = ['', '', '', '', '', '', '', '', '', '']; // Bug 4: Extra element
+            currentPlayer = 'x'; // Bug 5: Case mismatch
+            updateBoard();
+        }
+
+        initBoard();
+    </script>
+</body>
+</html>

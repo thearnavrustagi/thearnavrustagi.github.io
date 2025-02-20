@@ -1,0 +1,23 @@
+Bug 1 (makeMove): Uses = (assignment) instead of == or === for checking if a cell is empty. This sets every clicked cell to empty before assigning the player, breaking the game logic.
+
+    Debugging: Requires console.log or breakpoints to see gameBoard being overwritten unexpectedly.
+
+Bug 2 (updateBoard): The cells[i].innerText = gameBoard[i + 1] has an off-by-one error, starting from index 1 instead of 0, leaving the first cell blank and trying to access an undefined index.
+
+    Debugging: DOM inspection or logging gameBoard and cells lengths reveals the mismatch.
+
+Bug 3 (checkWinner): The comparison gameBoard[combo[0]] == gameBoard[combo[1]] == gameBoard[combo[2]] is syntactically incorrect (chained equality doesn’t work as intended in JS). It evaluates left-to-right and doesn’t compare all three properly.
+
+    Debugging: Console logging the condition or stepping through with breakpoints shows it never triggers correctly.
+
+Bug 4 (resetGame): gameBoard is reset with 10 elements ('' repeated 10 times) instead of 9, causing an array length mismatch with the 9 DOM cells.
+
+    Debugging: Requires inspecting gameBoard.length vs. cells.length in dev tools.
+
+Bug 5 (resetGame): currentPlayer is set to 'x' (lowercase) instead of 'X' (uppercase), which mismatches the initial 'X' and comparison logic, breaking player switching.
+
+    Debugging: Console logging currentPlayer after reset shows the case inconsistency.
+
+Bonus Bug (checkWinner): Even if fixed, it doesn’t stop the game after a win (no game-over logic), allowing continued play. Subtle and requires observing runtime behavior.
+
+    Debugging: Requires noticing DOM updates continue post-win via inspection.

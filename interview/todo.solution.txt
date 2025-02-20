@@ -1,0 +1,12 @@
+input.Value - Should be input.value (wrong capitalization)
+if (taskText = "") - Assignment instead of comparison (should be == or ===)
+tasks.Push() - Should be tasks.push() (wrong method name)
+deleteBtn.onclick = deleteTask() - Immediate function execution instead of assignment (should be deleteTask without ())
+checkbox.onChange - Should be checkbox.onchange (case sensitivity)
+li.append(DELETEBTN) - Wrong variable name (should be deleteBtn) and capitalization
+tasks[index].completed - Trying to set property on string (tasks array contains strings, not objects)
+li.TextContent - Should be li.textContent (wrong capitalization)
+task.splice() - Wrong array name (should be tasks)
+addTask in event listener - Missing () so function won't execute
+Bonus bug: Delete button won't work properly because this context is lost
+Bonus bug: toggleComplete will fail because textContent includes button text
